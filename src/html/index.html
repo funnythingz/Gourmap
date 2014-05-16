@@ -7,6 +7,26 @@
   <h1>{{title}}</h1>
 
   <p>{{greeting}}</p>
-  <p>{{api}}</p>
+
+  <div ng-repeat="shop in shops">
+    <article class="entry">
+      <div class="flex">
+          <div class="item item-owner">
+              <figure id="owner-{{shop.id}}" class="owner">
+                  <img src="{{shop.logo_image}}" class="avatar">
+                  <figcaption>{{shop.name}}</figcaption>
+              </figure>
+          </div>
+          <div class="item">
+              <p class="description">{{shop.catch}}</p>
+              <p class="gist"><a href="http://www.hotpepper.jp/str{{shop.id}}/" target="_blank">店舗詳細を見る</a></p>
+              <ul class="meta">
+                  <li>アクセス: {{shop.access}}</li>
+                  <li>住所: {{shop.address}}</li>
+              </ul>
+          </div>
+      </div>
+    </article>
+  </div>
 
 </body></html>

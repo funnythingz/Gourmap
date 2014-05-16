@@ -11,7 +11,7 @@ module Gourmap {
 
         constructor() {
             this.gourmap.controller('gourmapCtrl', GourmapController)
-                        .factory('api', ApiService);
+                        .factory('apiService', ApiService);
         }
     
     }
