@@ -1,6 +1,7 @@
 /// <reference path="../../typings/tsd.d.ts" />
 
 /// <reference path="controller/gourmap-controller.ts" />
+/// <reference path="service/api.ts" />
 
 module Gourmap {
 
@@ -9,7 +10,8 @@ module Gourmap {
         gourmap: ng.IModule = angular.module('gourmap', []);
 
         constructor() {
-            this.gourmap.controller('gourmapCtrl', GourmapController);
+            this.gourmap.controller('gourmapCtrl', GourmapController)
+                        .factory('api', ApiService);
         }
     
     }
