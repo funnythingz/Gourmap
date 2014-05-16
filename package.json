@@ -1,0 +1,19 @@
+{
+  "name": "Gourmap",
+  "version": "0.0.0",
+  "description": "Gourmap",
+  "author": "funnythingz",
+  "license": "BSD",
+  "devDependencies": {
+    "grunt": "latest",
+    "grunt-typescript": "latest",
+    "grunt-contrib-uglify": "latest",
+    "grunt-contrib-clean": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-contrib-compass": "latest",
+    "grunt-contrib-connect": "latest",
+    "grunt-contrib-copy": "latest",
+    "testem": "~0.6.2",
+    "chai": "~1.9.0"
+  }
+}
