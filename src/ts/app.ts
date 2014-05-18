@@ -10,8 +10,10 @@ module Gourmap {
         gourmap: ng.IModule = angular.module('gourmap', []);
 
         constructor() {
+
             this.gourmap.controller('gourmapCtrl', GourmapController)
                         .factory('apiService', ApiService);
+
         }
     
     }
