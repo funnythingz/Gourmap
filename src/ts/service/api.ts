@@ -7,12 +7,18 @@ module Gourmap {
         static key: string = '47f38c102d2ddf17';
         static format: string = 'jsonp';
         static callback: string = 'JSON_CALLBACK';
+        static genre: string = 'ラーメン';
 
     }
 
     export class ApiService {
 
-        public url: string = 'http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=47f38c102d2ddf17&format=jsonp&callback=JSON_CALLBACK&keyword=ラーメン';
+        public url: string = 'http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?' +
+                             'key=' + ApiData.key +
+                             '&format=' + ApiData.format +
+                             '&callback=' + ApiData.callback +
+                             '&keyword=' + ApiData.genre;
+
         public promise: any;
 
         constructor(public $http: ng.IHttpService) {
