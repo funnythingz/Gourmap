@@ -1,7 +1,0 @@
-{
-  "framework" : "mocha+chai",
-  "src_files" : [
-    "build/app.js",
-    "tests/**/*.js"
-  ]
-}
