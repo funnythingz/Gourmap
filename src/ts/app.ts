@@ -7,7 +7,7 @@ module Gourmap {
 
     export class Apprication {
 
-        gourmap: ng.IModule = angular.module('gourmap', []);
+        gourmap: ng.IModule = angular.module('gourmap', ['google-maps']);
 
         constructor() {
 

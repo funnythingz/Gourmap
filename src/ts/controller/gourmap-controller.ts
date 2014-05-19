@@ -6,6 +6,7 @@ module Gourmap {
         title: string;
         greeting: string;
         shops: any;
+        map;
     }
 
     export class GourmapController {
@@ -21,6 +22,18 @@ module Gourmap {
                 console.log(json);
                 ctrl.$scope.shops = json.results.shop;
             });
+
+
+            this.$scope.map = {
+
+                center: {
+                    latitude: 35.670651,
+                    longitude: 139.77186099999994
+                },
+
+                zoom: 16
+
+            };
 
         }
 

@@ -14,3 +14,27 @@ h1 {
 .entry {
   margin-bottom: .5em;
 }
+
+.angular-google-map-container {
+  height: 400px;
+}
+
+%_item {
+  display: table-cell;
+  vertical-align: top;
+}
+
+.result-layout {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.entry-collection-view {
+  width: 240px;
+  @extend %_item;
+}
+
+.map-view {
+  @extend %_item;
+}
