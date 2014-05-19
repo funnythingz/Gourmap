@@ -12,6 +12,14 @@ var Gourmap;
                 console.log(json);
                 ctrl.$scope.shops = json.results.shop;
             });
+
+            this.$scope.map = {
+                center: {
+                    latitude: 35.670651,
+                    longitude: 139.77186099999994
+                },
+                zoom: 16
+            };
         }
         return GourmapController;
     })();
@@ -46,7 +54,7 @@ var Gourmap;
 (function (Gourmap) {
     var Apprication = (function () {
         function Apprication() {
-            this.gourmap = angular.module('gourmap', []);
+            this.gourmap = angular.module('gourmap', ['google-maps']);
             this.gourmap.controller('gourmapCtrl', Gourmap.GourmapController).factory('apiService', Gourmap.ApiService);
         }
         return Apprication;
