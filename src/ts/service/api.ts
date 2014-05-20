@@ -2,32 +2,40 @@
 
 module Gourmap {
 
-    export class ApiData {
+    export class HotpepperApiSingleton {
 
-        static key: string = '47f38c102d2ddf17';
-        static format: string = 'jsonp';
-        static callback: string = 'JSON_CALLBACK';
-        static genre: string = 'ラーメン';
+        private static _instance: HotpepperApiSingleton = null;
 
-    }
+        constructor() {
+            if(HotpepperApiSingleton._instance) {
+                throw console.log('Error: Instantiation failed');
+            }
+            HotpepperApiSingleton._instance = this;
+        }
 
-    export class ApiService {
+        static getInstance(): HotpepperApiSingleton {
+            if(HotpepperApiSingleton._instance === null) {
+                HotpepperApiSingleton._instance = new HotpepperApiSingleton();
+            }
+            return HotpepperApiSingleton._instance;
+        }
 
-        url: string = 'http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?' +
-                             'key=' + ApiData.key +
-                             '&format=' + ApiData.format +
-                             '&callback=' + ApiData.callback +
-                             '&keyword=' + ApiData.genre;
+        key: string = '47f38c102d2ddf17';
+        format: string = 'jsonp';
+        callback: string = 'JSON_CALLBACK';
 
-        promise: any;
+        createApiPath(freeWord: string): string {
 
-        constructor(public $http: ng.IHttpService) {
+            return 'http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?' +
+                          'key=' + this.key +
+                          '&format=' + this.format +
+                          '&callback=' + this.callback +
+                          '&keyword=' + freeWord;
 
-            this.promise = this.$http.jsonp(this.url);
-
-            return this;
         }
 
     }
+
+    export var HotpepperApi = HotpepperApiSingleton.getInstance();
 
 }

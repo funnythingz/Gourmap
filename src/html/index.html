@@ -11,6 +11,8 @@
 
   <p>{{greeting}}</p>
 
+  <input ng-init="freeWord='ラーメン'" ng-model="freeWord" ng-change="callSearch(freeWord)">
+
   <div class="result-layout">
     <section class="entry-collection-view">
       <article class="entry" ng-repeat="shop in shops">

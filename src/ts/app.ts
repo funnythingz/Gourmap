@@ -1,7 +1,7 @@
 /// <reference path="../../typings/tsd.d.ts" />
 
 /// <reference path="controller/gourmap-controller.ts" />
-/// <reference path="service/api.ts" />
+/// <reference path="service/search.ts" />
 
 module Gourmap {
 
@@ -12,7 +12,7 @@ module Gourmap {
         constructor() {
 
             this.gourmap.controller('gourmapCtrl', GourmapController)
-                        .factory('apiService', ApiService);
+                        .factory('search', Search);
 
         }
     

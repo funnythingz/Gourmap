@@ -2,26 +2,22 @@
 
 module Gourmap {
 
-    export interface IGourmapScope extends ng.IScope {
+    export interface ISearchScope extends ng.IScope {
         title: string;
         greeting: string;
         shops: any;
-        map;
+        map: any;
+        callSearch: any;
     }
 
     export class GourmapController {
 
-        constructor(private $scope: IGourmapScope, apiService) {
+        constructor(private $scope: ISearchScope, private search) {
 
             this.$scope.title = "Gourmap";
             this.$scope.greeting = 'hello Angular !';
 
-            var ctrl = this;
-
-            apiService.promise.success(function(json) {
-                console.log(json);
-                ctrl.$scope.shops = json.results.shop;
-            });
+            this.$scope.callSearch = (freeWord: string)=> this.freeWordSearch(freeWord);
 
             this.$scope.map = {
 
@@ -33,6 +29,18 @@ module Gourmap {
                 zoom: 16
 
             };
+
+        }
+
+        private freeWordSearch(freeWord: string) {
+
+            var apiPath: string = HotpepperApi.createApiPath(freeWord);
+
+            var promise = this.search.$http.jsonp(apiPath);
+
+            promise.success((json)=> {
+                this.$scope.shops = json.results.shop;
+            });
 
         }
 
