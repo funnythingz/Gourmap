@@ -1,17 +1,16 @@
 var Gourmap;
 (function (Gourmap) {
     var GourmapController = (function () {
-        function GourmapController($scope, apiService) {
+        function GourmapController($scope, search) {
+            var _this = this;
             this.$scope = $scope;
+            this.search = search;
             this.$scope.title = "Gourmap";
             this.$scope.greeting = 'hello Angular !';
 
-            var ctrl = this;
-
-            apiService.promise.success(function (json) {
-                console.log(json);
-                ctrl.$scope.shops = json.results.shop;
-            });
+            this.$scope.callSearch = function (freeWord) {
+                return _this.freeWordSearch(freeWord);
+            };
 
             this.$scope.map = {
                 center: {
@@ -21,46 +20,71 @@ var Gourmap;
                 zoom: 16
             };
         }
+        GourmapController.prototype.freeWordSearch = function (freeWord) {
+            var _this = this;
+            var apiPath = Gourmap.HotpepperApi.createApiPath(freeWord);
+
+            var promise = this.search.$http.jsonp(apiPath);
+
+            promise.success(function (json) {
+                _this.$scope.shops = json.results.shop;
+            });
+        };
         return GourmapController;
     })();
     Gourmap.GourmapController = GourmapController;
 })(Gourmap || (Gourmap = {}));
 var Gourmap;
 (function (Gourmap) {
-    var ApiData = (function () {
-        function ApiData() {
-        }
-        ApiData.key = '47f38c102d2ddf17';
-        ApiData.format = 'jsonp';
-        ApiData.callback = 'JSON_CALLBACK';
-        ApiData.genre = 'ラーメン';
-        return ApiData;
-    })();
-    Gourmap.ApiData = ApiData;
-
-    var ApiService = (function () {
-        function ApiService($http) {
+    var Search = (function () {
+        function Search($http) {
             this.$http = $http;
-            this.url = 'http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?' + 'key=' + ApiData.key + '&format=' + ApiData.format + '&callback=' + ApiData.callback + '&keyword=' + ApiData.genre;
-            this.promise = this.$http.jsonp(this.url);
-
             return this;
         }
-        return ApiService;
+        return Search;
     })();
-    Gourmap.ApiService = ApiService;
+    Gourmap.Search = Search;
 })(Gourmap || (Gourmap = {}));
 var Gourmap;
 (function (Gourmap) {
     var Apprication = (function () {
         function Apprication() {
             this.gourmap = angular.module('gourmap', ['google-maps']);
-            this.gourmap.controller('gourmapCtrl', Gourmap.GourmapController).factory('apiService', Gourmap.ApiService);
+            this.gourmap.controller('gourmapCtrl', Gourmap.GourmapController).factory('search', Gourmap.Search);
         }
         return Apprication;
     })();
     Gourmap.Apprication = Apprication;
 
     new Apprication();
+})(Gourmap || (Gourmap = {}));
+var Gourmap;
+(function (Gourmap) {
+    var HotpepperApiSingleton = (function () {
+        function HotpepperApiSingleton() {
+            this.key = '47f38c102d2ddf17';
+            this.format = 'jsonp';
+            this.callback = 'JSON_CALLBACK';
+            if (HotpepperApiSingleton._instance) {
+                throw console.log('Error: Instantiation failed');
+            }
+            HotpepperApiSingleton._instance = this;
+        }
+        HotpepperApiSingleton.getInstance = function () {
+            if (HotpepperApiSingleton._instance === null) {
+                HotpepperApiSingleton._instance = new HotpepperApiSingleton();
+            }
+            return HotpepperApiSingleton._instance;
+        };
+
+        HotpepperApiSingleton.prototype.createApiPath = function (freeWord) {
+            return 'http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?' + 'key=' + this.key + '&format=' + this.format + '&callback=' + this.callback + '&keyword=' + freeWord;
+        };
+        HotpepperApiSingleton._instance = null;
+        return HotpepperApiSingleton;
+    })();
+    Gourmap.HotpepperApiSingleton = HotpepperApiSingleton;
+
+    Gourmap.HotpepperApi = HotpepperApiSingleton.getInstance();
 })(Gourmap || (Gourmap = {}));
 //# sourceMappingURL=app.js.map
