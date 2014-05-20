@@ -14,6 +14,21 @@ module.exports = (grunt)->
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json')
 
+    clean: ['build/*']
+
+    typescript:
+      base:
+        src: ['src/ts/**/*.ts']
+        dest: 'build/app.js'
+        options:
+          sourceMap: true
+
+      test:
+        src: ['tests/**/*.ts']
+        dest: 'tests/test.js'
+        options:
+          sourceMap: true
+
     uglify:
       dist:
         files: 'build/app.min.js': ['build/app.js']
@@ -59,19 +74,6 @@ module.exports = (grunt)->
           dest: 'build/js/'
         }]
 
-    typescript:
-      base:
-        src: ['src/ts/**/*.ts']
-        dest: 'build/app.js'
-        options:
-          sourceMap: true
-
-      test:
-        src: ['tests/**/*.ts']
-        dest: 'tests/test.js'
-        options:
-          sourceMap: true
-
     compass:
       dist:
         options:
@@ -95,8 +97,6 @@ module.exports = (grunt)->
         tasks: ['copy:html']
         options:
           atBegin: true
-
-    clean: ['build/*']
 
     connect:
       server:

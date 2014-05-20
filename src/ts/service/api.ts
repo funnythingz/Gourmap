@@ -13,13 +13,13 @@ module Gourmap {
 
     export class ApiService {
 
-        public url: string = 'http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?' +
+        url: string = 'http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?' +
                              'key=' + ApiData.key +
                              '&format=' + ApiData.format +
                              '&callback=' + ApiData.callback +
                              '&keyword=' + ApiData.genre;
 
-        public promise: any;
+        promise: any;
 
         constructor(public $http: ng.IHttpService) {
 

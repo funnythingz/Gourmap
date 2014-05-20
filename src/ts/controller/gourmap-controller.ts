@@ -23,7 +23,6 @@ module Gourmap {
                 ctrl.$scope.shops = json.results.shop;
             });
 
-
             this.$scope.map = {
 
                 center: {
