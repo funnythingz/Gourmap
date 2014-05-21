@@ -12,7 +12,8 @@ module Gourmap {
         constructor() {
 
             this.gourmap.controller('gourmapCtrl', GourmapController)
-                        .factory('search', Search);
+                        .factory('search', Search)
+                        .factory('helloModel', ()=> {return new Hello('Gourmap', 'Hello, Angular');});
 
         }
     

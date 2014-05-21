@@ -7,16 +7,20 @@ module Gourmap {
         private static _instance: HotpepperApiSingleton = null;
 
         constructor() {
+
             if(HotpepperApiSingleton._instance) {
                 throw console.log('Error: Instantiation failed');
             }
+
             HotpepperApiSingleton._instance = this;
         }
 
         static getInstance(): HotpepperApiSingleton {
+
             if(HotpepperApiSingleton._instance === null) {
                 HotpepperApiSingleton._instance = new HotpepperApiSingleton();
             }
+
             return HotpepperApiSingleton._instance;
         }
 

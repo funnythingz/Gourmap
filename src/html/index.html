@@ -7,9 +7,8 @@
 <script src="app.js"></script>
 </head><body ng-controller="gourmapCtrl">
 
-  <h1>{{title}}</h1>
-
-  <p>{{greeting}}</p>
+  <h1>{{helloModel.title}}</h1>
+  <p>{{helloModel.description}}</p>
 
   <input ng-init="freeWord='ラーメン'" ng-model="freeWord" ng-change="callSearch(freeWord)">
 

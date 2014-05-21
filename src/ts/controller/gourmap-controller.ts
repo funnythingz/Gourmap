@@ -3,8 +3,7 @@
 module Gourmap {
 
     export interface ISearchScope extends ng.IScope {
-        title: string;
-        greeting: string;
+        helloModel: any;
         shops: any;
         map: any;
         callSearch: any;
@@ -12,10 +11,11 @@ module Gourmap {
 
     export class GourmapController {
 
-        constructor(private $scope: ISearchScope, private search) {
+        constructor(private $scope: ISearchScope,
+                    private search,
+                    private helloModel) {
 
-            this.$scope.title = "Gourmap";
-            this.$scope.greeting = 'hello Angular !';
+            this.$scope.helloModel = helloModel;
 
             this.$scope.callSearch = (freeWord: string)=> this.freeWordSearch(freeWord);
 
