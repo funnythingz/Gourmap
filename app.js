@@ -1,12 +1,12 @@
 var Gourmap;
 (function (Gourmap) {
     var GourmapController = (function () {
-        function GourmapController($scope, search) {
+        function GourmapController($scope, search, helloModel) {
             var _this = this;
             this.$scope = $scope;
             this.search = search;
-            this.$scope.title = "Gourmap";
-            this.$scope.greeting = 'hello Angular !';
+            this.helloModel = helloModel;
+            this.$scope.helloModel = helloModel;
 
             this.$scope.callSearch = function (freeWord) {
                 return _this.freeWordSearch(freeWord);
@@ -50,7 +50,9 @@ var Gourmap;
     var Apprication = (function () {
         function Apprication() {
             this.gourmap = angular.module('gourmap', ['google-maps']);
-            this.gourmap.controller('gourmapCtrl', Gourmap.GourmapController).factory('search', Gourmap.Search);
+            this.gourmap.controller('gourmapCtrl', Gourmap.GourmapController).factory('search', Gourmap.Search).factory('helloModel', function () {
+                return new Gourmap.Hello('Gourmap', 'Hello, Angular');
+            });
         }
         return Apprication;
     })();
@@ -68,12 +70,14 @@ var Gourmap;
             if (HotpepperApiSingleton._instance) {
                 throw console.log('Error: Instantiation failed');
             }
+
             HotpepperApiSingleton._instance = this;
         }
         HotpepperApiSingleton.getInstance = function () {
             if (HotpepperApiSingleton._instance === null) {
                 HotpepperApiSingleton._instance = new HotpepperApiSingleton();
             }
+
             return HotpepperApiSingleton._instance;
         };
 
@@ -86,5 +90,16 @@ var Gourmap;
     Gourmap.HotpepperApiSingleton = HotpepperApiSingleton;
 
     Gourmap.HotpepperApi = HotpepperApiSingleton.getInstance();
+})(Gourmap || (Gourmap = {}));
+var Gourmap;
+(function (Gourmap) {
+    var Hello = (function () {
+        function Hello(title, description) {
+            this.title = title;
+            this.description = description;
+        }
+        return Hello;
+    })();
+    Gourmap.Hello = Hello;
 })(Gourmap || (Gourmap = {}));
 //# sourceMappingURL=app.js.map
