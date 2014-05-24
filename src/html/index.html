@@ -10,7 +10,7 @@
   <h1>{{helloModel.title}}</h1>
   <p>{{helloModel.description}}</p>
 
-  <input ng-init="freeWord='ラーメン'" ng-model="freeWord" ng-change="callSearch(freeWord)">
+  <input ng-init="freeWord='ラーメン';callSearch(freeWord)" ng-model="freeWord" ng-change="callSearch(freeWord)">
 
   <div class="result-layout">
     <section class="entry-collection-view">

@@ -17,7 +17,7 @@ module Gourmap {
 
         static getInstance(): HotpepperApiSingleton {
 
-            if(HotpepperApiSingleton._instance === null) {
+            if(_.isNull(HotpepperApiSingleton._instance)) {
                 HotpepperApiSingleton._instance = new HotpepperApiSingleton();
             }
 
