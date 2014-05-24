@@ -11,9 +11,6 @@ module Gourmap {
 
     export class GourmapController {
 
-        lat: number = HotpepperApi.lat;
-        lng: number = HotpepperApi.lng;
-
         constructor(private $scope: ISearchScope,
                     private search,
                     private helloModel) {
@@ -30,10 +27,6 @@ module Gourmap {
 
             var promise = this.search.$http.jsonp(apiPath);
 
-            console.log('search');
-            console.log(this.lat);
-            console.log(this.lng);
-
             this.$scope.map = {
 
                 center: {
@@ -41,33 +34,21 @@ module Gourmap {
                     longitude: HotpepperApi.lng
                 },
 
-                zoom: 16,
-
-                shopMarkers: [
-                    {
-                        id: 1,
-                        latitude: this.lat,
-                        longitude: this.lng,
-                        showWindow: false,
-                        title: 'shop markers'
-                    }
-                ]
+                zoom: 16
 
             };
 
             promise.success((json)=> {
+
                 console.log(json.results);
+
+                var googleMapFactory: GoogleMapFactory = new GoogleMapFactory(json);
 
                 var resultShops: any = json.results.shop;
 
                 this.$scope.shops = resultShops;
 
-                this.lat = parseFloat(resultShops[0].lat);
-                this.lng = parseFloat(resultShops[0].lng);
-
-                console.log('success');
-                console.log(this.lat);
-                console.log(this.lng);
+                this.$scope.map.shopMarkers = googleMapFactory.createShopMarkers();
 
             });
 
