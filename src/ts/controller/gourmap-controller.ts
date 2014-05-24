@@ -29,6 +29,8 @@ module Gourmap {
 
             this.$scope.map = {
 
+                // ここで地図を表示しておかないとコールバック後に
+                // 地図を表示できないのでデフォをいれとく
                 center: {
                     latitude: HotpepperApi.lat,
                     longitude: HotpepperApi.lng
@@ -44,9 +46,9 @@ module Gourmap {
 
                 var googleMapFactory: GoogleMapFactory = new GoogleMapFactory(json);
 
-                var resultShops: any = json.results.shop;
+                this.$scope.shops = json.results.shop;
 
-                this.$scope.shops = resultShops;
+                this.$scope.map.center = googleMapFactory.createMapCenter();
 
                 this.$scope.map.shopMarkers = googleMapFactory.createShopMarkers();
 

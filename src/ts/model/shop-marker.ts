@@ -8,7 +8,7 @@ module Gourmap {
                     public showWindow: boolean,
                     public title: string) {
                     
-            return this;            
+            return this;
         }
 
     }

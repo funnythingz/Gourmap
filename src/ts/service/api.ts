@@ -27,8 +27,11 @@ module Gourmap {
         key: string = '47f38c102d2ddf17';
         format: string = 'jsonp';
         callback: string = 'JSON_CALLBACK';
-        lat: number = 35.6943735;
-        lng: number = 139.7072483;
+
+        // TODO: 固定で新宿をいれているが
+        // http://geoapi.heartrails.com/api.html のAPIを使って位置情報を取得する
+        lat: number = 35.689839;
+        lng: number = 139.719711;
 
         createApiPath(freeWord: string): string {
 
@@ -36,9 +39,10 @@ module Gourmap {
                           'key=' + this.key +
                           '&format=' + this.format +
                           '&callback=' + this.callback +
-                          '&lat=' + this.lat.toString() +
-                          '&lng=' + this.lng.toString() +
-                          '&keyword=' + freeWord;
+                          '&lat=' + this.lat +
+                          '&lng=' + this.lng +
+                          '&keyword=' + freeWord
+                          ;
 
         }
 

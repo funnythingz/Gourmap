@@ -20,6 +20,13 @@ module Gourmap {
 
         }
 
+        createMapCenter(): MapCenter {
+
+            return new MapCenter(parseFloat(this.json.results.shop[0].lat),
+                                 parseFloat(this.json.results.shop[0].lng));
+
+        }
+
     }
 
 }
