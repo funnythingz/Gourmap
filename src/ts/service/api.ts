@@ -27,6 +27,8 @@ module Gourmap {
         key: string = '47f38c102d2ddf17';
         format: string = 'jsonp';
         callback: string = 'JSON_CALLBACK';
+        lat: number = 35.6943735;
+        lng: number = 139.7072483;
 
         createApiPath(freeWord: string): string {
 
@@ -34,6 +36,8 @@ module Gourmap {
                           'key=' + this.key +
                           '&format=' + this.format +
                           '&callback=' + this.callback +
+                          '&lat=' + this.lat.toString() +
+                          '&lng=' + this.lng.toString() +
                           '&keyword=' + freeWord;
 
         }

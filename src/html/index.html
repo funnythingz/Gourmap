@@ -28,6 +28,8 @@
                 <ul class="meta">
                     <li>アクセス: {{shop.access}}</li>
                     <li>住所: {{shop.address}}</li>
+                    <li>lat: {{shop.lat}}</li>
+                    <li>lng: {{shop.lng}}</li>
                 </ul>
             </div>
         </div>
@@ -44,6 +46,25 @@
                   options="map.options"
                   pan="true"
                   control="map.control">
+
+
+
+        <markers models="map.shopMarkers" coords="'self'">
+        <!--markers models="map.markers2" coords="'self'" icon="'icon'" click="'onClicked'" labelContent="'title'" labelAnchor="22 0" labelClass="marker-labels"-->
+            <!--windows show="'showWindow'" closeClick="'closeClick'" ng-cloak>
+                <div>
+                    I should not be attached to a
+                    marker.
+                    <div ng-controller='InfoController'>
+                        <a class="btn" ng-click="clickedButtonInWindow()">CLICK ME</a>
+                    </div>
+                    <p ng-non-bindable >This is an info window at {{ latitude | number:4 }}, {{ longitude | number:4 }}!</p>
+
+                    <p class="muted">My marker will stay open when the window is popped up!</p>
+                </div>
+            </windows-->
+        </markers>
+
 
       </google-map>
     </section>
