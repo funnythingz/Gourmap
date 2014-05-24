@@ -10,7 +10,7 @@
   <h1>{{helloModel.title}}</h1>
   <p>{{helloModel.description}}</p>
 
-  <input ng-init="freeWord='ラーメン'" ng-model="freeWord" ng-change="callSearch(freeWord)">
+  <input ng-init="freeWord='ラーメン';callSearch(freeWord)" ng-model="freeWord" ng-change="callSearch(freeWord)">
 
   <div class="result-layout">
     <section class="entry-collection-view">
@@ -28,6 +28,8 @@
                 <ul class="meta">
                     <li>アクセス: {{shop.access}}</li>
                     <li>住所: {{shop.address}}</li>
+                    <li>lat: {{shop.lat}}</li>
+                    <li>lng: {{shop.lng}}</li>
                 </ul>
             </div>
         </div>
@@ -44,6 +46,18 @@
                   options="map.options"
                   pan="true"
                   control="map.control">
+
+
+
+        <markers models="map.shopMarkers" coords="'self'" click="'onClicked'">
+            <windows show="'showWindow'" closeClick="'closeClick'" ng-cloak>
+                <div>
+                    I should not be attached to a
+                    marker.
+                </div>
+            </windows>
+        </markers>
+
 
       </google-map>
     </section>
