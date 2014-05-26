@@ -12,6 +12,18 @@ body {
   height: 400px;
 }
 
+.button-small {
+  font-size: 70%;
+}
+
+.right {
+  text-align: right;
+}
+
+.center {
+  text-align: center;
+}
+
 %col {
   display: table-cell;
   vertical-align: middle;
