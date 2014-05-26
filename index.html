@@ -1,4 +1,6 @@
 <!Doctype html><html lang="en" ng-app="gourmap"><head><meta charset="utf-8"><title>Gourmap</title>
+<link href='http://fonts.googleapis.com/css?family=Walter+Turncoat' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.4.2/pure-min.css">
 <link rel="stylesheet" href="gourmap.css">
 <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script src="js/angular.min.js"></script>
@@ -7,10 +9,14 @@
 <script src="app.js"></script>
 </head><body ng-controller="gourmapCtrl">
 
-  <h1>{{helloModel.title}}</h1>
-  <p>{{helloModel.description}}</p>
-
-  <input ng-init="freeWord='ラーメン';callSearch(freeWord)" ng-model="freeWord" ng-change="callSearch(freeWord)">
+  <header class="header">
+    <h1 class="app-name">{{helloModel.title}}</h1>
+    <div class="search">
+      <div class="pure-form">
+        <input class="pure-input-rounded" ng-init="freeWord='ラーメン';callSearch(freeWord)" ng-model="freeWord" ng-change="callSearch(freeWord)" placeholder="ex: ラーメン">
+      </div>
+    </div>
+  </header>
 
   <div class="result-layout">
     <section class="entry-collection-view">
@@ -19,18 +25,18 @@
             <div class="item item-owner">
                 <figure id="owner-{{shop.id}}" class="owner">
                     <img src="{{shop.logo_image}}" class="avatar">
-                    <figcaption>{{shop.name}}</figcaption>
+                    <figcaption class="shop-name">{{shop.name}}</figcaption>
                 </figure>
             </div>
-            <div class="item">
+            <div class="item item-info">
                 <p class="description">{{shop.catch}}</p>
-                <p class="gist"><a href="http://www.hotpepper.jp/str{{shop.id}}/" target="_blank">店舗詳細を見る</a></p>
                 <ul class="meta">
                     <li>アクセス: {{shop.access}}</li>
                     <li>住所: {{shop.address}}</li>
                     <li>lat: {{shop.lat}}</li>
                     <li>lng: {{shop.lng}}</li>
                 </ul>
+                <p class="center"><a href="http://www.hotpepper.jp/str{{shop.id}}/" target="_blank" class="pure-button pure-button-primary button-small">店舗詳細を見る</a></p>
             </div>
         </div>
       </article>
@@ -47,8 +53,6 @@
                   pan="true"
                   control="map.control">
 
-
-
         <markers models="map.shopMarkers" coords="'self'" click="'onClicked'">
             <windows show="'showWindow'" closeClick="'closeClick'" ng-cloak>
                 <div>
@@ -57,7 +61,6 @@
                 </div>
             </windows>
         </markers>
-
 
       </google-map>
     </section>
