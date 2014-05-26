@@ -3,20 +3,47 @@
 @import "compass/css3";
 
 body {
-  background-color: #f1f2f3;
+  background-color: #e7e8e9;
   font-family: Helvetica, arial, freesans, clean, sans-serif;
-}
-
-h1 {
-  color: #123;
-}
-
-.entry {
-  margin-bottom: .5em;
+  @include box-sizing('border-box');
 }
 
 .angular-google-map-container {
   height: 400px;
+}
+
+%col {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.header {
+
+  display: table;
+  table-layout: fixed;
+  margin: 1em auto;
+  width: 96%;
+
+  .app-name {
+    color: #123;
+    font-family: 'Walter Turncoat', cursive;
+    font-size: 36px;
+    @include text-shadow(0 1px 0 #f7f8f9);
+    width: 5em;
+    @extend %col;
+  }
+
+  .search {
+    @extend %col;
+
+    .pure-input-rounded {
+      width: 100%;
+    }
+  }
+}
+
+.entry {
+  margin-bottom: .5em;
 }
 
 %_item {
@@ -37,4 +64,78 @@ h1 {
 
 .map-view {
   @extend %_item;
+}
+
+%sentence {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.flex {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+
+  .item {
+    @extend %col;
+    vertical-align: top;
+
+    &.item-owner {
+      width: 72px;
+    }
+
+    .owner {
+      margin: 0;
+    }
+
+    .shop-name {
+      @extend %sentence;
+    }
+
+    .avatar {
+      width: 72px;
+      height: 72px;
+    }
+
+    &.item-info {
+      padding-left: 6px;
+    }
+
+    .show-detail {
+      background-color: #1f8dd6;
+      @include border-radius(2px);
+      font-size: 13px;
+      line-height: 1.4;
+      text-align: center;
+      margin: 5px;
+      padding: 5px;
+
+      &:hover {
+        background-color: #265778;
+      }
+
+      a {
+        color: #fff;
+        text-decoration: none;
+      }
+    }
+
+    .description {
+      font-size: 13px;
+      line-height: 1.4;
+      margin: 5px;
+    }
+
+    .meta {
+      @extend %sentence;
+      margin: 0;
+      padding-left: 1.5em;
+
+      li {
+        @extend %sentence;
+        margin-bottom: 5px;
+      }
+    }
+
+  }
 }
