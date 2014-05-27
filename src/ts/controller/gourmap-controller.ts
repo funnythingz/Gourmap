@@ -21,6 +21,25 @@ module Gourmap {
 
         }
 
+        private fitHeightForFullMap() {
+
+            var el = document.querySelector('.angular-google-map-container');
+
+            var timer;
+            window.onresize = function(){
+                if (_.isEqual(timer, false)) {
+                    clearTimeout(timer);
+                }
+
+                timer = setTimeout(function() {
+                    var styleStr = el.getAttribute('style').replace(/height:.*?;/, '');
+                    el.setAttribute('style', 'height:' + Util.getMapHeight() + 'px;' + styleStr);
+                }, 300);
+
+            }
+
+        }
+
         private freeWordSearch(freeWord: string) {
 
             var apiPath: string = HotpepperApi.createApiPath(freeWord);
@@ -64,6 +83,8 @@ module Gourmap {
                     };
 
                 });
+
+                this.fitHeightForFullMap();
 
             });
 
