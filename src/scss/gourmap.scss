@@ -1,6 +1,7 @@
 @charset "utf-8";
 
 @import "compass/css3";
+@import "compass/utilities/general/clearfix";
 
 body {
   background-color: #e7e8e9;
@@ -30,11 +31,11 @@ body {
 }
 
 .header {
-
+  @include box-sizing('border-box');
   display: table;
   table-layout: fixed;
-  margin: 1em auto;
-  width: 98%;
+  padding: .5em;
+  width: 100%;
 
   .app-name {
     color: #123;
@@ -56,6 +57,7 @@ body {
 
 .entry {
   margin-bottom: .5em;
+  padding: .5em;
 }
 
 %_item {
@@ -64,18 +66,25 @@ body {
 }
 
 .result-layout {
-  display: table;
-  table-layout: fixed;
+  position: relative;
   width: 100%;
 }
 
 .entry-collection-view {
+  position: absolute;
+  overflow: scroll;
+  background-color: #f7f8f9;
   width: 240px;
-  @extend %_item;
+  top: 0; left: 0;
+  z-index: 1;
 }
 
 .map-view {
-  @extend %_item;
+  width: 100%;
+  padding-left: 240px;
+  position: relative;
+  top: 0; left: 0; right: 0;
+  @include box-sizing('border-box');
 }
 
 %sentence {

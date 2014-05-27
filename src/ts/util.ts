@@ -3,6 +3,7 @@
 module Util {
 
     export function getElmPosition(arg: string): any {
+
         var left: number = 0, top: number = 0;
         var elm: any = document.getElementById(arg);
 

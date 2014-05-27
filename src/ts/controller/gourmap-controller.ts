@@ -19,24 +19,29 @@ module Gourmap {
 
             this.$scope.callSearch = (freeWord: string)=> this.freeWordSearch(freeWord);
 
+            this.fitHeightForFullMap();
+
         }
 
         private fitHeightForFullMap() {
 
-            var el = document.querySelector('.angular-google-map-container');
+            var $map = $('.angular-google-map-container');
+            var $entryList = $('#entry-collection-view');
+
+            $map.css('height', Util.getMapHeight() + 'px');
+            $entryList.css('height', Util.getMapHeight() + 'px');
 
             var timer;
-            window.onresize = function(){
+            $(window).on('resize', ()=> {
                 if (_.isEqual(timer, false)) {
                     clearTimeout(timer);
                 }
 
-                timer = setTimeout(function() {
-                    var styleStr = el.getAttribute('style').replace(/height:.*?;/, '');
-                    el.setAttribute('style', 'height:' + Util.getMapHeight() + 'px;' + styleStr);
+                timer = setTimeout(()=> {
+                    $map.css('height', Util.getMapHeight() + 'px');
+                    $entryList.css('height', Util.getMapHeight() + 'px');
                 }, 300);
-
-            }
+            });
 
         }
 
@@ -83,8 +88,6 @@ module Gourmap {
                     };
 
                 });
-
-                this.fitHeightForFullMap();
 
             });
 
