@@ -7,9 +7,12 @@ module Gourmap {
         shops: any;
         map: any;
         callSearch: any;
+        freeWord: any;
     }
 
     export class GourmapController {
+
+        private lat: number
 
         constructor(private $scope: ISearchScope,
                     private search,
@@ -20,6 +23,34 @@ module Gourmap {
             this.$scope.callSearch = (freeWord: string)=> this.freeWordSearch(freeWord);
 
             this.fitHeightForFullMap();
+
+            this.$scope.map = {
+
+                // ここで地図を表示しておかないとコールバック後に
+                // 地図を表示できないのでデフォをいれとく
+                center: {
+                    latitude: HotpepperApi.lat,
+                    longitude: HotpepperApi.lng
+                },
+
+                zoom: 16,
+
+                events: {
+                    'drag' : ()=> {
+                        var timer;
+                        if (_.isEqual(timer, false)) {
+                            clearTimeout(timer);
+                        }
+
+                        timer = setTimeout(()=> {
+                            HotpepperApi.lat = this.$scope.map.center.latitude;
+                            HotpepperApi.lng = this.$scope.map.center.longitude;
+                            this.freeWordSearch(this.$scope.freeWord);
+                        }, 500);
+                    }
+                }
+
+            };
 
         }
 
@@ -50,19 +81,6 @@ module Gourmap {
             var apiPath: string = HotpepperApi.createApiPath(freeWord);
 
             var promise = this.search.$http.jsonp(apiPath);
-
-            this.$scope.map = {
-
-                // ここで地図を表示しておかないとコールバック後に
-                // 地図を表示できないのでデフォをいれとく
-                center: {
-                    latitude: HotpepperApi.lat,
-                    longitude: HotpepperApi.lng
-                },
-
-                zoom: 16
-
-            };
 
             promise.success((json)=> {
 
