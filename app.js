@@ -11,20 +11,56 @@ var Gourmap;
             this.$scope.callSearch = function (freeWord) {
                 return _this.freeWordSearch(freeWord);
             };
-        }
-        GourmapController.prototype.freeWordSearch = function (freeWord) {
-            var _this = this;
-            var apiPath = Gourmap.HotpepperApi.createApiPath(freeWord);
 
-            var promise = this.search.$http.jsonp(apiPath);
+            this.fitHeightForFullMap();
 
             this.$scope.map = {
                 center: {
                     latitude: Gourmap.HotpepperApi.lat,
                     longitude: Gourmap.HotpepperApi.lng
                 },
-                zoom: 16
+                zoom: 16,
+                events: {
+                    'drag': function () {
+                        var timer;
+                        if (_.isEqual(timer, false)) {
+                            clearTimeout(timer);
+                        }
+
+                        timer = setTimeout(function () {
+                            Gourmap.HotpepperApi.lat = _this.$scope.map.center.latitude;
+                            Gourmap.HotpepperApi.lng = _this.$scope.map.center.longitude;
+                            _this.freeWordSearch(_this.$scope.freeWord);
+                        }, 500);
+                    }
+                }
             };
+        }
+        GourmapController.prototype.fitHeightForFullMap = function () {
+            var $map = $('.angular-google-map-container');
+            var $entryList = $('#entry-collection-view');
+
+            $map.css('height', Util.getMapHeight() + 'px');
+            $entryList.css('height', Util.getMapHeight() + 'px');
+
+            var timer;
+            $(window).on('resize', function () {
+                if (_.isEqual(timer, false)) {
+                    clearTimeout(timer);
+                }
+
+                timer = setTimeout(function () {
+                    $map.css('height', Util.getMapHeight() + 'px');
+                    $entryList.css('height', Util.getMapHeight() + 'px');
+                }, 300);
+            });
+        };
+
+        GourmapController.prototype.freeWordSearch = function (freeWord) {
+            var _this = this;
+            var apiPath = Gourmap.HotpepperApi.createApiPath(freeWord);
+
+            var promise = this.search.$http.jsonp(apiPath);
 
             promise.success(function (json) {
                 console.log(json.results);
@@ -173,4 +209,25 @@ var Gourmap;
     })();
     Gourmap.Hello = Hello;
 })(Gourmap || (Gourmap = {}));
+var Util;
+(function (Util) {
+    function getElmPosition(arg) {
+        var left = 0, top = 0;
+        var elm = document.getElementById(arg);
+
+        while (elm.parentNode) {
+            left += elm.offsetLeft;
+            top += elm.offsetTop;
+            elm = elm.parentNode;
+        }
+
+        return { 'left': left, 'top': top };
+    }
+    Util.getElmPosition = getElmPosition;
+
+    function getMapHeight() {
+        return window.innerHeight - getElmPosition('result-layout').top;
+    }
+    Util.getMapHeight = getMapHeight;
+})(Util || (Util = {}));
 //# sourceMappingURL=app.js.map
