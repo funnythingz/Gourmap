@@ -3,7 +3,10 @@
 - TypeScript
 - Angular
 - GoogleMaps for Angular
+- HotPepper API
 
-つくってる
+つくってる。
+
+http://www.funnythingz.com/Gourmap/
 
 &copy; funnythingz
