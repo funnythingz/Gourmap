@@ -89,7 +89,6 @@ module Gourmap {
                 var googleMapFactory: GoogleMapFactory = new GoogleMapFactory(json);
 
                 this.$scope.shops = json.results.shop;
-                this.$scope.map.center = googleMapFactory.createMapCenter();
                 this.$scope.map.shopMarkers = googleMapFactory.createShopMarkers();
 
                 angular.forEach(this.$scope.map.shopMarkers, (marker)=> {
