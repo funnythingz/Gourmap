@@ -30,8 +30,8 @@ module Gourmap {
 
         // TODO: 固定で新宿をいれているが
         // http://geoapi.heartrails.com/api.html のAPIを使って位置情報を取得する
-        lat: number = 35.689839;
-        lng: number = 139.719711;
+        lat: number = 35.6742506;
+        lng: number = 139.7649463;
 
         createApiPath(freeWord: string): string {
 
