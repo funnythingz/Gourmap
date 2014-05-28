@@ -167,8 +167,8 @@ var Gourmap;
             this.key = '47f38c102d2ddf17';
             this.format = 'jsonp';
             this.callback = 'JSON_CALLBACK';
-            this.lat = 35.689839;
-            this.lng = 139.719711;
+            this.lat = 35.6742506;
+            this.lng = 139.7649463;
             if (HotpepperApiSingleton._instance) {
                 throw console.log('Error: Instantiation failed');
             }
