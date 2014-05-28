@@ -68,7 +68,6 @@ var Gourmap;
                 var googleMapFactory = new Gourmap.GoogleMapFactory(json);
 
                 _this.$scope.shops = json.results.shop;
-                _this.$scope.map.center = googleMapFactory.createMapCenter();
                 _this.$scope.map.shopMarkers = googleMapFactory.createShopMarkers();
 
                 angular.forEach(_this.$scope.map.shopMarkers, function (marker) {
@@ -129,10 +128,6 @@ var Gourmap;
             });
 
             return shopMarkers;
-        };
-
-        GoogleMapFactory.prototype.createMapCenter = function () {
-            return new Gourmap.MapCenter(parseFloat(this.json.results.shop[0].lat), parseFloat(this.json.results.shop[0].lng));
         };
         return GoogleMapFactory;
     })();
