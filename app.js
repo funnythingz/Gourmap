@@ -68,7 +68,6 @@ var Gourmap;
                 var googleMapFactory = new Gourmap.GoogleMapFactory(json);
 
                 _this.$scope.shops = json.results.shop;
-                _this.$scope.map.center = googleMapFactory.createMapCenter();
                 _this.$scope.map.shopMarkers = googleMapFactory.createShopMarkers();
 
                 angular.forEach(_this.$scope.map.shopMarkers, function (marker) {
@@ -130,10 +129,6 @@ var Gourmap;
 
             return shopMarkers;
         };
-
-        GoogleMapFactory.prototype.createMapCenter = function () {
-            return new Gourmap.MapCenter(parseFloat(this.json.results.shop[0].lat), parseFloat(this.json.results.shop[0].lng));
-        };
         return GoogleMapFactory;
     })();
     Gourmap.GoogleMapFactory = GoogleMapFactory;
@@ -172,8 +167,8 @@ var Gourmap;
             this.key = '47f38c102d2ddf17';
             this.format = 'jsonp';
             this.callback = 'JSON_CALLBACK';
-            this.lat = 35.689839;
-            this.lng = 139.719711;
+            this.lat = 35.6742506;
+            this.lng = 139.7649463;
             if (HotpepperApiSingleton._instance) {
                 throw console.log('Error: Instantiation failed');
             }
