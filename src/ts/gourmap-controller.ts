@@ -31,6 +31,18 @@ module Gourmap {
 
             $scope.map = new google.maps.Map(document.getElementById('map-view'), mapOptions);
 
+            google.maps.event.addListener($scope.map, 'drag', ()=> {
+                var timer;
+                if (_.isEqual(timer, false)) {
+                    clearTimeout(timer);
+                }
+
+                timer = setTimeout(()=> {
+                    HotpepperApi.lat = this.$scope.map.getCenter().lat();
+                    HotpepperApi.lng = this.$scope.map.getCenter().lng();
+                    this.freeWordSearch(this.$scope.freeWord);
+                }, 500);
+            });
             /**
             this.$scope.map = {
 

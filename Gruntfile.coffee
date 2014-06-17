@@ -58,14 +58,6 @@ module.exports = (grunt)->
           dest: 'build/js/'
         }]
 
-      angularGoogleMaps:
-        files: [{
-          expand: true
-          cwd: 'bower_components/angular-google-maps/dist/'
-          src: ['angular-google-maps.min.js']
-          dest: 'build/js/'
-        }]
-
       underscore:
         files: [{
           expand: true
