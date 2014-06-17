@@ -43,28 +43,7 @@
       </article>
     </section>
 
-    <section class="map-view" id="map-view">
-      <google-map center="map.center"
-                  zoom="map.zoom"
-                  draggable="true"
-                  dragging="map.dragging"
-                  bounds="map.bounds"
-                  events="map.events"
-                  options="map.options"
-                  pan="true"
-                  control="map.control">
-
-        <markers models="map.shopMarkers" coords="'self'" click="'onClicked'">
-            <windows show="'showWindow'" closeClick="'closeClick'" ng-cloak>
-                <div>
-                    I should not be attached to a
-                    marker.
-                </div>
-            </windows>
-        </markers>
-
-      </google-map>
-    </section>
+    <section class="map-view" id="map-view"></section>
   </div>
 
 </body></html>

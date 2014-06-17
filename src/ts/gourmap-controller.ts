@@ -24,6 +24,14 @@ module Gourmap {
 
             this.fitHeightForFullMap();
 
+            var mapOptions = {
+                zoom: 16,
+                center: new google.maps.LatLng(HotpepperApi.lat, HotpepperApi.lng)
+            }
+
+            $scope.map = new google.maps.Map(document.getElementById('map-view'), mapOptions);
+
+            /**
             this.$scope.map = {
 
                 // ここで地図を表示しておかないとコールバック後に
@@ -51,12 +59,13 @@ module Gourmap {
                 }
 
             };
+            /**/
 
         }
 
         private fitHeightForFullMap() {
 
-            var $map = $('.angular-google-map-container');
+            var $map = $('#map-view');
             var $entryList = $('#entry-collection-view');
 
             $map.css('height', Util.getMapHeight() + 'px');
@@ -89,6 +98,8 @@ module Gourmap {
                 var googleMapFactory: GoogleMapFactory = new GoogleMapFactory(json);
 
                 this.$scope.shops = json.results.shop;
+
+                /**
                 this.$scope.map.shopMarkers = googleMapFactory.createShopMarkers();
 
                 angular.forEach(this.$scope.map.shopMarkers, (marker)=> {
@@ -105,6 +116,7 @@ module Gourmap {
                     };
 
                 });
+                /**/
 
             });
 
