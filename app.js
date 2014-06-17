@@ -135,6 +135,17 @@ var Gourmap;
 })(Gourmap || (Gourmap = {}));
 var Gourmap;
 (function (Gourmap) {
+    var Hello = (function () {
+        function Hello(title, description) {
+            this.title = title;
+            this.description = description;
+        }
+        return Hello;
+    })();
+    Gourmap.Hello = Hello;
+})(Gourmap || (Gourmap = {}));
+var Gourmap;
+(function (Gourmap) {
     var MapCenter = (function () {
         function MapCenter(latitude, longitude) {
             this.latitude = latitude;
@@ -192,17 +203,6 @@ var Gourmap;
     Gourmap.HotpepperApiSingleton = HotpepperApiSingleton;
 
     Gourmap.HotpepperApi = HotpepperApiSingleton.getInstance();
-})(Gourmap || (Gourmap = {}));
-var Gourmap;
-(function (Gourmap) {
-    var Hello = (function () {
-        function Hello(title, description) {
-            this.title = title;
-            this.description = description;
-        }
-        return Hello;
-    })();
-    Gourmap.Hello = Hello;
 })(Gourmap || (Gourmap = {}));
 var Util;
 (function (Util) {
