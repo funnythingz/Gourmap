@@ -4,10 +4,11 @@ module Gourmap {
 
     export interface ISearchScope extends ng.IScope {
         helloModel: any;
-        shops: any;
-        map: any;
+        shops: Array<ShopMarker>;
+        map: google.maps.Map;
         callSearch: any;
         freeWord: any;
+        markers: Array<google.maps.Marker>
     }
 
     export class GourmapController {
@@ -24,39 +25,33 @@ module Gourmap {
 
             this.fitHeightForFullMap();
 
-            this.$scope.map = {
-
-                // ここで地図を表示しておかないとコールバック後に
-                // 地図を表示できないのでデフォをいれとく
-                center: {
-                    latitude: HotpepperApi.lat,
-                    longitude: HotpepperApi.lng
-                },
-
+            var mapOptions = {
                 zoom: 16,
+                center: new google.maps.LatLng(HotpepperApi.lat, HotpepperApi.lng)
+            }
 
-                events: {
-                    'drag' : ()=> {
-                        var timer;
-                        if (_.isEqual(timer, false)) {
-                            clearTimeout(timer);
-                        }
+            $scope.map = new google.maps.Map(document.getElementById('map-view'), mapOptions);
 
-                        timer = setTimeout(()=> {
-                            HotpepperApi.lat = this.$scope.map.center.latitude;
-                            HotpepperApi.lng = this.$scope.map.center.longitude;
-                            this.freeWordSearch(this.$scope.freeWord);
-                        }, 500);
-                    }
-                }
+            google.maps.event.addListener($scope.map, 'drag', ()=> {this.renderMap()});
 
-            };
+        }
 
+        private renderMap() {
+            var timer;
+            if (_.isEqual(timer, false)) {
+                clearTimeout(timer);
+            }
+
+            timer = setTimeout(()=> {
+                HotpepperApi.lat = this.$scope.map.getCenter().lat();
+                HotpepperApi.lng = this.$scope.map.getCenter().lng();
+                this.freeWordSearch(this.$scope.freeWord);
+            }, 300);
         }
 
         private fitHeightForFullMap() {
 
-            var $map = $('.angular-google-map-container');
+            var $map = $('#map-view');
             var $entryList = $('#entry-collection-view');
 
             $map.css('height', Util.getMapHeight() + 'px');
@@ -88,7 +83,14 @@ module Gourmap {
 
                 var googleMapFactory: GoogleMapFactory = new GoogleMapFactory(json);
 
-                this.$scope.shops = json.results.shop;
+                //this.$scope.shops = json.results.shop;
+                this.$scope.shops = googleMapFactory.createShopMarkers();
+
+                //console.log(this.$scope.shops);
+
+                var markersFactory = new MarkersFactory(this.$scope.shops, this.$scope.map);
+                this.$scope.markers = markersFactory.createMarkers();
+                /**
                 this.$scope.map.shopMarkers = googleMapFactory.createShopMarkers();
 
                 angular.forEach(this.$scope.map.shopMarkers, (marker)=> {
@@ -105,6 +107,7 @@ module Gourmap {
                     };
 
                 });
+                /**/
 
             });
 

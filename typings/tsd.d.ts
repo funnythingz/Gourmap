@@ -4,3 +4,4 @@
 /// <reference path="mocha/mocha.d.ts" />
 /// <reference path="should/should.d.ts" />
 /// <reference path="underscore/underscore.d.ts" />
+/// <reference path="googlemaps/google.maps.d.ts" />

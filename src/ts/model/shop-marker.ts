@@ -3,10 +3,14 @@ module Gourmap {
     export class ShopMarker {
 
         constructor(public id: number,
-                    public latitude: number,
-                    public longitude: number,
+                    public name: string,
+                    public lat: number,
+                    public lng: number,
                     public showWindow: boolean,
-                    public title: string) {
+                    public access: string,
+                    public address: string,
+                    public description: string,
+                    public logo_image: string) {
                     
             return this;
         }

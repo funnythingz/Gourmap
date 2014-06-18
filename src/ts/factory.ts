@@ -10,10 +10,14 @@ module Gourmap {
 
             angular.forEach(this.json.results.shop, function(value, key) {
                 shopMarkers.push(new ShopMarker(value.id,
+                                                value.name,
                                                 parseFloat(value.lat),
                                                 parseFloat(value.lng),
                                                 false,
-                                                value.name));
+                                                value.access,
+                                                value.address,
+                                                value.catch,
+                                                value.logo_image));
             });
 
             return shopMarkers;

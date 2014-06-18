@@ -2,7 +2,6 @@
   "name": "Gourmap",
   "dependencies": {
     "angular" : "https://github.com/angular/bower-angular.git#*",
-    "underscore" : "https://github.com/funnythingz/underscore.git#1.6.1",
-    "angular-google-maps" : "https://github.com/nlaplante/angular-google-maps.git#1.1.0"
+    "underscore" : "https://github.com/funnythingz/underscore.git#1.6.1"
   }
 }

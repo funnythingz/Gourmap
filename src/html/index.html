@@ -6,7 +6,6 @@
 <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="js/angular.min.js"></script>
 <script src="js/underscore-min.js"></script>
-<script src="js/angular-google-maps.min.js"></script>
 <script src="app.js"></script>
 </head><body ng-controller="gourmapCtrl">
 
@@ -30,7 +29,7 @@
                 </figure>
             </div>
             <div class="item item-info">
-                <p class="description">{{shop.catch}}</p>
+                <p class="description">{{shop.description}}</p>
                 <ul class="meta">
                     <li>アクセス: {{shop.access}}</li>
                     <li>住所: {{shop.address}}</li>
@@ -43,28 +42,7 @@
       </article>
     </section>
 
-    <section class="map-view" id="map-view">
-      <google-map center="map.center"
-                  zoom="map.zoom"
-                  draggable="true"
-                  dragging="map.dragging"
-                  bounds="map.bounds"
-                  events="map.events"
-                  options="map.options"
-                  pan="true"
-                  control="map.control">
-
-        <markers models="map.shopMarkers" coords="'self'" click="'onClicked'">
-            <windows show="'showWindow'" closeClick="'closeClick'" ng-cloak>
-                <div>
-                    I should not be attached to a
-                    marker.
-                </div>
-            </windows>
-        </markers>
-
-      </google-map>
-    </section>
+    <section class="map-view" id="map-view"></section>
   </div>
 
 </body></html>
