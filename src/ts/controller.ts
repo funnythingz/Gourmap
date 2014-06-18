@@ -4,10 +4,11 @@ module Gourmap {
 
     export interface ISearchScope extends ng.IScope {
         helloModel: any;
-        shops: any;
-        map: any;
+        shops: Array<ShopMarker>;
+        map: google.maps.Map;
         callSearch: any;
         freeWord: any;
+        markers: Array<google.maps.Marker>
     }
 
     export class GourmapController {
@@ -82,8 +83,13 @@ module Gourmap {
 
                 var googleMapFactory: GoogleMapFactory = new GoogleMapFactory(json);
 
-                this.$scope.shops = json.results.shop;
+                //this.$scope.shops = json.results.shop;
+                this.$scope.shops = googleMapFactory.createShopMarkers();
 
+                //console.log(this.$scope.shops);
+
+                var markersFactory = new MarkersFactory(this.$scope.shops, this.$scope.map);
+                this.$scope.markers = markersFactory.createMarkers();
                 /**
                 this.$scope.map.shopMarkers = googleMapFactory.createShopMarkers();
 
