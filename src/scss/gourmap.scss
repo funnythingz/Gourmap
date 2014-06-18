@@ -5,7 +5,7 @@
 
 body {
   background-color: #e7e8e9;
-  font-family: Helvetica, arial, freesans, clean, sans-serif;
+  font-family: Helvetica,Arial,Sans-Serif,"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","ＭＳ Ｐゴシック","MS PGothic";
   @include box-sizing('border-box');
 }
 
@@ -35,7 +35,7 @@ body {
 
   .app-name {
     color: #123;
-    font-family: 'Walter Turncoat', cursive;
+    font-family: 'Arimo';
     font-size: 36px;
     @include text-shadow(0 1px 0 #f7f8f9);
     width: 5em;
