@@ -31,48 +31,21 @@ module Gourmap {
 
             $scope.map = new google.maps.Map(document.getElementById('map-view'), mapOptions);
 
-            google.maps.event.addListener($scope.map, 'drag', ()=> {
-                var timer;
-                if (_.isEqual(timer, false)) {
-                    clearTimeout(timer);
-                }
+            google.maps.event.addListener($scope.map, 'drag', ()=> {this.renderMap()});
 
-                timer = setTimeout(()=> {
-                    HotpepperApi.lat = this.$scope.map.getCenter().lat();
-                    HotpepperApi.lng = this.$scope.map.getCenter().lng();
-                    this.freeWordSearch(this.$scope.freeWord);
-                }, 500);
-            });
-            /**
-            this.$scope.map = {
+        }
 
-                // ここで地図を表示しておかないとコールバック後に
-                // 地図を表示できないのでデフォをいれとく
-                center: {
-                    latitude: HotpepperApi.lat,
-                    longitude: HotpepperApi.lng
-                },
+        private renderMap() {
+            var timer;
+            if (_.isEqual(timer, false)) {
+                clearTimeout(timer);
+            }
 
-                zoom: 16,
-
-                events: {
-                    'drag' : ()=> {
-                        var timer;
-                        if (_.isEqual(timer, false)) {
-                            clearTimeout(timer);
-                        }
-
-                        timer = setTimeout(()=> {
-                            HotpepperApi.lat = this.$scope.map.center.latitude;
-                            HotpepperApi.lng = this.$scope.map.center.longitude;
-                            this.freeWordSearch(this.$scope.freeWord);
-                        }, 500);
-                    }
-                }
-
-            };
-            /**/
-
+            timer = setTimeout(()=> {
+                HotpepperApi.lat = this.$scope.map.getCenter().lat();
+                HotpepperApi.lng = this.$scope.map.getCenter().lng();
+                this.freeWordSearch(this.$scope.freeWord);
+            }, 300);
         }
 
         private fitHeightForFullMap() {

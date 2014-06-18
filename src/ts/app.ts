@@ -1,6 +1,6 @@
 /// <reference path="../../typings/tsd.d.ts" />
 
-/// <reference path="gourmap-controller.ts" />
+/// <reference path="controller.ts" />
 /// <reference path="service/search.ts" />
 
 module Gourmap {
