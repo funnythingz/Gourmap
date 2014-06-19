@@ -2,6 +2,8 @@ module Gourmap {
 
     export class MarkersFactory {
 
+        markerCacheList: google.maps.MVCArray = new google.maps.MVCArray();
+
         constructor(private shopMarkers: Array<ShopMarker>,
                     private map: google.maps.Map) {}
 
@@ -10,7 +12,12 @@ module Gourmap {
             var resultMarkers: Array<google.maps.Marker> = [];
 
             angular.forEach(this.shopMarkers, (shopMarker)=> {
-                resultMarkers.push(this.createMarker(shopMarker));
+
+                var marker: google.maps.Marker = this.createMarker(shopMarker);
+
+                resultMarkers.push(marker);
+
+                this.markerCacheList.push(marker);
             });
 
             return resultMarkers;
@@ -33,7 +40,14 @@ module Gourmap {
 
             return marker;
         }
-    
+
+        removeAllMarker() {
+            this.markerCacheList.forEach((marker, index)=> {
+                console.log(index);
+                marker.setMap(null);
+            });
+        }
+
     }
 
 }

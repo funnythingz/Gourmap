@@ -86,10 +86,14 @@ module Gourmap {
                 //this.$scope.shops = json.results.shop;
                 this.$scope.shops = googleMapFactory.createShopMarkers();
 
-                console.log(this.$scope.shops);
+                //console.log(this.$scope.shops);
 
                 var markersFactory = new MarkersFactory(this.$scope.shops, this.$scope.map);
+
                 this.$scope.markers = markersFactory.createMarkers();
+
+                // TODO: markerの削除をここではないどこかでやる
+                // markersFactory.removeAllMarker();
 
             });
 
