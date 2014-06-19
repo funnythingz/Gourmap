@@ -7,19 +7,31 @@ module Gourmap {
 
         createMarkers(): Array<google.maps.Marker> {
 
-            return [];
+            var resultMarkers: Array<google.maps.Marker> = [];
+
+            angular.forEach(this.shopMarkers, (shopMarker)=> {
+                resultMarkers.push(this.createMarker(shopMarker));
+            });
+
+            return resultMarkers;
         }
 
         createMarker(shopMarker: ShopMarker): google.maps.Marker {
 
-            var infoWindow = new google.maps.InfoWindow();
+            var infoWindow: google.maps.InfoWindow = new google.maps.InfoWindow({
+                content: '<div class="info"><a href="http://www.hotpepper.jp/str' + shopMarker.id + '" target="_blank">' + shopMarker.name + '</a></div>'
+            });
 
-            var marker = new google.maps.Marker({
+            var marker: google.maps.Marker = new google.maps.Marker({
                 map: this.map,
                 position: new google.maps.LatLng(shopMarker.lat, shopMarker.lng)
             });
 
-            return null;
+            google.maps.event.addListener(marker, 'click', ()=> {
+                infoWindow.open(this.map, marker);
+            });
+
+            return marker;
         }
     
     }

@@ -86,28 +86,10 @@ module Gourmap {
                 //this.$scope.shops = json.results.shop;
                 this.$scope.shops = googleMapFactory.createShopMarkers();
 
-                //console.log(this.$scope.shops);
+                console.log(this.$scope.shops);
 
                 var markersFactory = new MarkersFactory(this.$scope.shops, this.$scope.map);
                 this.$scope.markers = markersFactory.createMarkers();
-                /**
-                this.$scope.map.shopMarkers = googleMapFactory.createShopMarkers();
-
-                angular.forEach(this.$scope.map.shopMarkers, (marker)=> {
-
-                    marker.closeClick = ()=> {
-                        marker.showWindow = false;
-                        this.$scope.$apply();
-                    };
-
-                    marker.onClicked = ()=> {
-                        console.log(marker);
-                        marker.showWindow = true;
-                        this.$scope.$apply();
-                    };
-
-                });
-                /**/
 
             });
 
