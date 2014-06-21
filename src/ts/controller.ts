@@ -13,7 +13,7 @@ module Gourmap {
 
     export class GourmapController {
 
-        private lat: number
+        private markersCracker: MarkersCracker = new MarkersCracker();
 
         constructor(private $scope: ISearchScope,
                     private search,
@@ -31,7 +31,6 @@ module Gourmap {
             }
 
             $scope.map = new google.maps.Map(document.getElementById('map-view'), mapOptions);
-
             google.maps.event.addListener($scope.map, 'drag', ()=> {this.renderMap()});
 
         }
@@ -74,26 +73,19 @@ module Gourmap {
         private freeWordSearch(freeWord: string) {
 
             var apiPath: string = HotpepperApi.createApiPath(freeWord);
-
             var promise = this.search.$http.jsonp(apiPath);
 
             promise.success((json)=> {
 
-                console.log(json.results);
+                this.markersCracker.remove();
 
                 var googleMapFactory: GoogleMapFactory = new GoogleMapFactory(json);
-
-                //this.$scope.shops = json.results.shop;
                 this.$scope.shops = googleMapFactory.createShopMarkers();
 
-                //console.log(this.$scope.shops);
-
                 var markersFactory = new MarkersFactory(this.$scope.shops, this.$scope.map);
-
                 this.$scope.markers = markersFactory.createMarkers();
 
-                // TODO: markerの削除をここではないどこかでやる
-                // markersFactory.removeAllMarker();
+                this.markersCracker.create(this.$scope.markers);
 
             });
 
