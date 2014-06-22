@@ -7,6 +7,7 @@ module Gourmap {
         shops: Array<ShopMarker>;
         map: google.maps.Map;
         callSearch: any;
+        callSearchFromEnter: any;
         freeWord: any;
         markers: Array<google.maps.Marker>
     }
@@ -22,6 +23,12 @@ module Gourmap {
             this.$scope.helloModel = helloModel;
 
             this.$scope.callSearch = (freeWord: string)=> this.freeWordSearch(freeWord);
+
+            this.$scope.callSearchFromEnter = (event: any, freeWord: string)=> {
+                if(_.isEqual(event.keyCode, 13)) {
+                    this.freeWordSearch(freeWord);
+                }
+            }
 
             this.fitHeightForFullMap();
 
