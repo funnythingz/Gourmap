@@ -13,6 +13,12 @@ var Gourmap;
                 return _this.freeWordSearch(freeWord);
             };
 
+            this.$scope.callSearchFromEnter = function (event, freeWord) {
+                if (_.isEqual(event.keyCode, 13)) {
+                    _this.freeWordSearch(freeWord);
+                }
+            };
+
             this.fitHeightForFullMap();
 
             var mapOptions = {
